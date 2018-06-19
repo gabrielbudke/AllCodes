@@ -1,9 +1,12 @@
 package exemplo08;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +30,8 @@ public class ExemploJCheckBox01  implements JFrameBaseInterface{
         gerarDimensoes();
         gerarLocalizacoes();
         adicionarComponentes();
+        acaoBotaoLimpar();
+        acaoBotaoSalvar();
         
         jFrame.setVisible(true);
         
@@ -77,5 +82,30 @@ public class ExemploJCheckBox01  implements JFrameBaseInterface{
     
     
     }
+    
+    public void acaoBotaoLimpar(){
+        jButtonLimpar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                jCheckBoxEuLiOsTermos.setSelected(false);
+                jCheckBoxEuAcheiOsTermos.setSelected(false);
+            }
+        });
+    }
+    
+    public void acaoBotaoSalvar(){
+        jButtonSalvar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(!jCheckBoxEuLiOsTermos.isSelected()){
+                    JOptionPane.showMessageDialog(null, "Leia os termos");
+                    return;
+                }
+                
+                JOptionPane.showMessageDialog(null, "Você acaba de vender livros");
+            }
+        });
+    }
+        
     
 }
