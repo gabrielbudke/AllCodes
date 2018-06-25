@@ -1,5 +1,6 @@
 
 import exemplo07.ExemploJRadioButton01;
+import exemplo10.Hospital;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -31,6 +32,7 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
         gerarDimensoes();
         gerarlocalizacao();
         acaoButton00();
+        acaoButton01();
         
         jFrame.setVisible(true);
     }
@@ -85,6 +87,7 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
     public void gerarDimensoes() {
 
         jButton00.setSize(100, 100);
+        jButton01.setSize(100,100);
 
     }
 
@@ -92,6 +95,7 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
     public void gerarlocalizacao() {
 
         jButton00.setLocation(10, 10);
+        jButton01.setLocation(120,10);
 
     }
     
@@ -99,6 +103,14 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
         jButton00.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 new ExemploJRadioButton01();
+            }
+        });
+    }
+    
+    private void acaoButton01(){
+        jButton01.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                new exemplo10.ExemploHospitalJFrame();
             }
         });
     }
