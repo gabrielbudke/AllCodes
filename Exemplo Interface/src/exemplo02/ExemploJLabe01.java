@@ -1,3 +1,7 @@
+package exemplo02;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,7 +30,7 @@ public class ExemploJLabe01{
 		public void actionPerformed(ActionEvent e){
 			labelNome.setText("troquei");
 		}
-	})
+	});
 
 
 

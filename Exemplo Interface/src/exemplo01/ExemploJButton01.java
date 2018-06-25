@@ -1,3 +1,5 @@
+package exemplo01;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 

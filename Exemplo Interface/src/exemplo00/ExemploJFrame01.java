@@ -1,3 +1,5 @@
+package exemplo00;
+
 import javax.swing.JFrame;
 import java.awt.Color;
 
