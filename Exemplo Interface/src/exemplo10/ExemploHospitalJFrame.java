@@ -24,7 +24,7 @@ import javax.swing.text.MaskFormatter;
  */
 public class ExemploHospitalJFrame implements JFrameBaseInterface {
 
-    private int linhaSelecionada == -1;
+    private int linhaSelecionada = -1;
     private JFrame jFrame;
     private JTextField jTextFieldNome;
     private JFormattedTextField jFormattedTextField;
@@ -51,6 +51,7 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
         configurarJTable();
         acaoBotaoAdicionar();
         acaoEditar();
+        acaoExcluir();
         jFrame.setVisible(true);
     }
 
@@ -259,5 +260,32 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
         jCheckBoxPrivado.setSelected(hospital.isPrivado());
         jFormattedTextField.setText(hospital.getCnpj());
     }
+    
+    private void acaoExcluir(){
+        jButtonExcluir.addActionListener(new ActionListener(){
+            public void actionperformed(ActionEvent e){
+                
+                if(jTable.getSelectedRow() == -1){
+                    JOptionPane.showMessageDialog(null, "Seleciona um registro filho");
+                    return;
+                }
+                
+                int escolha = JOptionPane.showConfirmDialog(null, 
+                        "Deseja realmente apagar?", "Aviso", JOptionPane.YES_NO_OPTION);
+                if(escolha == JOptionPane.YES_OPTION){
+                    linhaSelecionada = jTable.getSelectedRow();
+                    dtm.removeRow(linhaSelecionada);
+                    hospitais.remove(linhaSelecionada);
+                    limparCampos();
+                }
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+    }
+    
         
 }
