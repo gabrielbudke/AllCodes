@@ -9,6 +9,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
@@ -27,6 +29,8 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
     private JLabel jLabelAno, jLabelNome, jLabelRendaAnual,
             jLabelCategoria, jLabelCnpj;
     private JButton jButtonEditar, jButtonAdicionar, jButtonExcluir;
+    private JTable jTable;
+    private JScrollPane jScrollPane;
 
     public ExemploHospitalJFrame() {
         gerarTela();
@@ -63,11 +67,17 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
         jFrame.add(jButtonEditar);
         jFrame.add(jButtonExcluir);
         jFrame.add(jFormattedTextField);
+        jFrame.add(jScrollPane);
+        
 
     }
 
     @Override
     public void instanciarComponentes() {
+        
+        jTable = new JTable();
+        configurarJTable();
+        jScrollPane = new JScrollPane(jTable);
 
         jLabelAno = new JLabel("Ano");
         jLabelCategoria = new JLabel("Categoria");
