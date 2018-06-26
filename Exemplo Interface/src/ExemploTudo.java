@@ -89,6 +89,7 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
 
         jButton00.setSize(100, 100);
         jButton01.setSize(100,100);
+        jButton02.setSize(100,100);
 
     }
 
@@ -97,6 +98,7 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
 
         jButton00.setLocation(10, 10);
         jButton01.setLocation(120,10);
+        jButton02.setLocation(230,10);
 
     }
     

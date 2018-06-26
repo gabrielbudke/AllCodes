@@ -1,10 +1,9 @@
-
 package exemplo11;
 
-import com.sun.glass.events.KeyEvent;
 import exemplo08.JFrameBaseInterface;
 import java.awt.Color;
 import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -13,65 +12,60 @@ import javax.swing.JTextField;
  *
  * @author Alunos
  */
-public class ExemploJFrameKeyPressed implements JFrameBaseInterface{
+public class ExemploJFrameKeyPressed implements JFrameBaseInterface {
 
     private JFrame jFrame;
     private JTextField jTextFieldNumero;
-    
-    
-    public ExemploJFrameKeyPressed(){
+
+    public ExemploJFrameKeyPressed() {
         gerarTela();
         instanciarComponentes();
         gerarDimensoes();
         gerarLocalizacoes();
         adicionarComponentes();
         adicionarKeyPressed();
+        
+        jFrame.setVisible(true);
     }
-    
-    
-    
-    
-    
+
     @Override
     public void gerarTela() {
         jFrame = new JFrame();
-        jFrame.setSize(500,500);
+        jFrame.setSize(500, 500);
         jFrame.setLayout(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
     }
 
     @Override
     public void adicionarComponentes() {
         jFrame.add(jTextFieldNumero);
         
+
     }
 
     @Override
     public void instanciarComponentes() {
         jTextFieldNumero = new JTextField();
-    
+
     }
 
     @Override
     public void gerarLocalizacoes() {
-        jTextFieldNumero.setLocation(10,10);
-    
+        jTextFieldNumero.setLocation(10, 10);
+
     }
 
     @Override
     public void gerarDimensoes() {
-        jTextFieldNumero.setSize(100,20);
+        jTextFieldNumero.setSize(100, 20);
     }
-    
-    private void adicionarKeyPressed(){
-        jTextFieldNumero.addKeyListener new KeyListener(){
-            
-            public void keyTyped(KeyEvent e){
-            }
-            
-            public void keyPressed(KeyEvent e){
-                switch(e.getKeyCode()){
+
+    private void adicionarKeyPressed() {
+        jTextFieldNumero.addKeyListener(new KeyListener() {
+
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
                     case KeyEvent.VK_ENTER:
                         JOptionPane.showMessageDialog(null, "VIVA");
                         break;
@@ -91,7 +85,7 @@ public class ExemploJFrameKeyPressed implements JFrameBaseInterface{
                         jTextFieldNumero.setSelectedTextColor(Color.red); //troca a cor do texto selecionado
                         jTextFieldNumero.setSelectionStart(0); //seleciona onde o cursor deve começar
                         jTextFieldNumero.setSelectionEnd(
-                                jTextFieldNumero.getText().length()); 
+                                jTextFieldNumero.getText().length());
                         break;
                     case KeyEvent.VK_F11:
                         jTextFieldNumero.setCaretPosition(0); //joga o cursor pro inicio
@@ -100,13 +94,21 @@ public class ExemploJFrameKeyPressed implements JFrameBaseInterface{
                         jTextFieldNumero.setCaretPosition(jTextFieldNumero.getText().length());
                         break;
 
-                        
-                        
                 }
+
             }
-            
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
         });
+
     }
-        
-    
 }
