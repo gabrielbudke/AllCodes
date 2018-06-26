@@ -33,6 +33,7 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
         gerarlocalizacao();
         acaoButton00();
         acaoButton01();
+        acaoButton02();
         
         jFrame.setVisible(true);
     }
@@ -111,6 +112,16 @@ public class ExemploTudo implements ExemploBaseTudoInterface {
         jButton01.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 new exemplo10.ExemploHospitalJFrame();
+            }
+        });
+    }
+    
+    private void acaoButton02(){
+        jButton02.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new exemplo11.ExemploJFrameKeyPressed();
             }
         });
     }

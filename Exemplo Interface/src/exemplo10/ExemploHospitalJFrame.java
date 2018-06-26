@@ -259,8 +259,8 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
                     return;
                 }
 
-                //validar combobox
-                if (jComboBoxCategoria.getSelectedItem() == null) {
+                //validar Combobox
+                if (jComboBoxCategoria.getSelectedItem() == null) { 
                     JOptionPane.showMessageDialog(null, "Categoria deve ser selecionada");
                     jComboBoxCategoria.showPopup();
                     return;
