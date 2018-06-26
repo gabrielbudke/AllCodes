@@ -3,6 +3,7 @@ package exemplo10;
 import exemplo08.JFrameBaseInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -199,27 +200,124 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
     private void acaoBotaoAdicionar() {
         jButtonAdicionar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //validaçao do campo nome
+                if (jTextFieldNome.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Nome deve ser preenchido");
+                    jTextFieldNome.requestFocus(); //o requestFocus faz o cursor ir para o campo designado 
+                    return;
+                }
+
+                if (jTextFieldNome.getText().trim().length() < 3) {
+                    JOptionPane.showMessageDialog(null, "Nome deve conter 3 caracteres");
+                    jTextFieldNome.requestFocus();
+                    return;
+                }
+
+                //validação do campo ano
+                if (jTextFieldAno.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Ano deve ser preenchido");
+                    jTextFieldAno.requestFocus();
+                    return;
+                }
+
+                short ano = 0;
+                try {
+                    ano = Short.parseShort(jTextFieldAno.getText().trim());
+                    if (ano < 1500) {
+                        JOptionPane.showMessageDialog(null, "Ano não pode ser menor que 1500");
+                        jTextFieldAno.requestFocus();
+                        return;
+                    }
+                    int anoAtual = LocalDate.now().getYear();
+                    if (ano > anoAtual) {
+                        JOptionPane.showMessageDialog(null, "Ano não deve ser maior que o ano " + anoAtual);
+                        jTextFieldAno.requestFocus();
+                        return;
+
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Ano deve conter somente números");
+                    jTextFieldAno.requestFocus();
+                    return;
+
+                }
+
+                //validação CNPJ
+                String cnpj = jFormattedTextField.getText()
+                        .replace(".", "")
+                        .replace("/", "")
+                        .replace("-", "");
+
+                if (cnpj.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "CNPJ deve ser preenchido");
+                    jFormattedTextField.requestFocus();
+                    return;
+                }
+                if (cnpj.length() < 14) {
+                    JOptionPane.showMessageDialog(null, "CNPJ deve conter 14 digitos");
+                    jFormattedTextField.requestFocus();
+                    return;
+                }
+
+                //validar combobox
+                if (jComboBoxCategoria.getSelectedItem() == null) {
+                    JOptionPane.showMessageDialog(null, "Categoria deve ser selecionada");
+                    jComboBoxCategoria.showPopup();
+                    return;
+
+                }
+
+                //validar renda Atual
+                String rendaAnualTexto = jTextFieldRendaAnual
+                        .getText().trim().toUpperCase()
+                        .replace("R", "").replace("$", "")
+                        .replace(".", "").replace(",", ".")
+                        .replace(" ", "");
+                if (rendaAnualTexto.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Renda Anual deve ser preenchida");
+                    jTextFieldRendaAnual.requestFocus();
+                    return;
+
+                }
+
+                double rendaAnual = 0;
+                try {
+                    rendaAnual = Double.parseDouble(rendaAnualTexto);
+                    if (rendaAnual < 0) {
+                        JOptionPane.showMessageDialog(null, "Renda Anual deve ser positiva");
+                        jTextFieldRendaAnual.requestFocus();
+                        return;
+                    }
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Renda Anual deve conter somente números");
+                    jTextFieldRendaAnual.requestFocus();
+                    return;
+                }
+
+                //ano
+                //
                 Hospital hospital = new Hospital();
                 hospital.setNome(jTextFieldNome.getText());
-                hospital.setCnpj(jFormattedTextField.getText());
-                hospital.setRendaAnual(Double.parseDouble(jTextFieldRendaAnual.getText()));
-                hospital.setAno(Short.parseShort(jTextFieldAno.getText()));
+                hospital.setCnpj(cnpj);
+                hospital.setRendaAnual(rendaAnual);
+                hospital.setAno(ano);
                 hospital.setPrivado(jCheckBoxPrivado.isSelected());
                 hospital.setCategoria(jComboBoxCategoria.getSelectedItem().toString());
-              
-                if(linhaSelecionada == -1){
-                hospitais.add(hospital);  //add na ArrayList
-                dtm.addRow(new Object[]{
-                    hospital.getNome(),
-                    hospital.getCnpj(),
-                    hospital.getRendaAnual()
-                });
-                    
-                }else{
+
+                if (linhaSelecionada == -1) {
+                    hospitais.add(hospital);  //add na ArrayList
+                    dtm.addRow(new Object[]{
+                        hospital.getNome(),
+                        hospital.getCnpj(),
+                        hospital.getRendaAnual()
+                    });
+
+                } else {
                     hospitais.set(linhaSelecionada, hospital);
                     dtm.setValueAt(hospital.getNome(), linhaSelecionada, 0);
                     dtm.setValueAt(hospital.getCnpj(), linhaSelecionada, 1);
-                    dtm.setValueAt(hospital.getRendaAnual(), linhaSelecionada,2);
+                    dtm.setValueAt(hospital.getRendaAnual(), linhaSelecionada, 2);
                 };
 
                 limparCampos();
@@ -239,20 +337,20 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
         linhaSelecionada = -1;
 
     }
-    
-    private void acaoEditar(){
-        jButtonEditar.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+
+    private void acaoEditar() {
+        jButtonEditar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 linhaSelecionada = jTable.getSelectedRow();
                 Hospital hospital = hospitais.get(linhaSelecionada);
                 preencherCampos(hospital);
             }
-            
+
         });
-                
+
     }
-    
-    private void preencherCampos(Hospital hospital){
+
+    private void preencherCampos(Hospital hospital) {
         jTextFieldNome.setText(hospital.getNome());
         jTextFieldAno.setText(String.valueOf(hospital.getAno()));
         jTextFieldRendaAnual.setText(String.valueOf(hospital.getRendaAnual()));
@@ -260,19 +358,19 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
         jCheckBoxPrivado.setSelected(hospital.isPrivado());
         jFormattedTextField.setText(hospital.getCnpj());
     }
-    
-    private void acaoExcluir(){
-        jButtonExcluir.addActionListener(new ActionListener(){
-            public void actionperformed(ActionEvent e){
-                
-                if(jTable.getSelectedRow() == -1){
+
+    private void acaoExcluir() {
+        jButtonExcluir.addActionListener(new ActionListener() {
+            public void actionperformed(ActionEvent e) {
+
+                if (jTable.getSelectedRow() == -1) {
                     JOptionPane.showMessageDialog(null, "Seleciona um registro filho");
                     return;
                 }
-                
-                int escolha = JOptionPane.showConfirmDialog(null, 
+
+                int escolha = JOptionPane.showConfirmDialog(null,
                         "Deseja realmente apagar?", "Aviso", JOptionPane.YES_NO_OPTION);
-                if(escolha == JOptionPane.YES_OPTION){
+                if (escolha == JOptionPane.YES_OPTION) {
                     linhaSelecionada = jTable.getSelectedRow();
                     dtm.removeRow(linhaSelecionada);
                     hospitais.remove(linhaSelecionada);
@@ -286,6 +384,5 @@ public class ExemploHospitalJFrame implements JFrameBaseInterface {
             }
         });
     }
-    
-        
+
 }
