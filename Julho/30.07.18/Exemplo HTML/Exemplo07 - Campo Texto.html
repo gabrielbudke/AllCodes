@@ -2,15 +2,65 @@
 <html>
 <head>
 	<title>Exemplo07 - Campo Texto</title>
+	<meta charset="utf-8">
 </head>
 <body>
-	<label>Nome</label>
-	<input type="text">
+	<form action="urna.html" method="POST">
+		<label for="campo-nome">Nome</label>
+		<input type="text" id="campo-nome" name="nome">
+		<br />
 
-	<label>Idade</label>
-	<input type="number">
+		<label for="campo-idade">Idade</label>
+		<input type="number" id="campo-idade" name="idade">
+		<br />
 
-	<label>Email</label>
-	<input type="email">
+		<label for="campo-email">Email</label>
+		<input type="email" id="campo-email" name="email">
+		<br />
+
+		<label>Sexo</label>
+		<input type="radio" value="Feminino" name="sexo" 
+				id="campo-sexo-feminino">
+			<label for="campo-sexo-feminino">Feminino</label>		
+		<input type="radio" value="Masculino" name="sexo" 	
+				id="campo-sexo-masculino">		
+			<label for="campo-sexo-masculino">Masculino</label>
+		<br />
+
+		<label>Cor do olho</label>
+		<input type="checkbox" value="preto" name="olho" 
+				id="campo-cor-do-olho-preto">
+			<label for="campo-cor-do-olho-preto">Preto</label>
+		<input type="checkbox" value="marrom" name="olho" 
+				id="campo-cor-do-olho-marrom">
+			<label for="campo-cor-do-olho-marrom">Marrom</label>	
+		<input type="checkbox" value="azul" name="olho" id="campo-cor-do-olho-azul">
+			<label for="campo-cor-do-olho-azul">Azul</label>	
+		<input type="checkbox" value="verde" name="olho" id="campo-cor-do-olho-verde">
+		<label for="campo-cor-do-olho-verde">Verde</label>Verde
+		<br />
+
+
+		<label>Data de Nascimento</label>
+		<input type="date">	
+		<br />
+
+		<label>Senha</label>
+		<input type="password">
+		<br />
+
+		<label>Cor do fio do cabelo</label>
+		<input type="color">
+		<br />
+
+		<label>Arquivos</label>
+		<input type="file">
+		<br />
+
+		<input type="reset" value="Limpar">
+		<input type="submit" value="Cadastrar">
+	</form>
+
+
 </body>
 </html>
