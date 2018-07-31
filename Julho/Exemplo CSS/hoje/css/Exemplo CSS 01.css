@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Exemplo CSS 01</title>
-	<style>
-		.botao:hover{
+.botao:hover{
 			background-color: black;
 			color:#EACE21;
 			text-transform: uppercase;
@@ -33,13 +28,20 @@
 			
 		}
 
-	</style>
-</head>
-<body>
-	<div>
-		<a class="botao"
-			href="seila.html">Outro Exemplo
-		</a>
-	</div>
-</body>
-</html>
+		.imagem{
+			background-image: url("../imagens/pc.gif");
+			height:320px;
+			background-repeat: no-repeat;
+			background-position: top right;
+
+		}
+
+		.campo-texto{
+			border:0;
+			border-bottom: 1px solid red;
+		}
+
+		.campo-texto:focus{
+			outline:none;
+			border-bottom: 1px solid yellow;
+		}

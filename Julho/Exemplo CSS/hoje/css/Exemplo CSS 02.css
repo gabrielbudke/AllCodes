@@ -1,0 +1,38 @@
+body{
+	margin:0px;
+	padding:0px;
+}
+
+.lista{
+	margin:0 15%;
+
+}
+
+table{
+	width: 100%;
+}
+
+thead tr, tfoot tr{
+	height: 45px;
+	font-size: 19px;
+	background-color: darkmagenta;
+	color:white;
+}
+
+tbody tr{
+	height: 40px;
+	font-size: 18px;
+
+}
+
+td{
+	padding-left: 10px;
+}
+
+table tr:nth-child(odd) td{
+	background-color: #eeeeee;
+}
+
+table tr:nth-child:(even) td{
+	background-color: darkgray;
+}
